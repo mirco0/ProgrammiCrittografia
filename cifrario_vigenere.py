@@ -142,8 +142,9 @@ class CrittoAnalisi:
                 if(M_g > max_):
                     max_ = M_g
                     letter = g
-                print(f"{M_g:.4f}")
-            print()
+                # Utilizzato per creare file
+                # print(f"{M_g:.4f}")
+            # print()
             key.append(chr(letter + ord('A')))
 
         return "".join(key)
@@ -175,14 +176,19 @@ class CrittoAnalisi:
     
 if __name__ == "__main__":
     testo = '''KCCPKBGUFDPHQTYAVINRRTMVGRKDNBVFDETDGILTXRGUDDKOTFMBPVGEGLTGCKQRACQCWDNAWCRXIZAKFTLEWRPTYCQKYVXCHKFTPONCQQRHJVAJUWETMCMSPKQDYHJVDAHCTRLSVSKCGCZQQDZXGSFRLSWCWSJTBHAFSIASPRJAHKJRJUMVGKMITZHFPDISPZLVLGWTFPLKKEBDPGCEBSHCTJRWXBAFSPEZQNRWXCVYCGAONWDDKACKAWBBIKFTIOVKCGGHJVLNHIFFSQESVYCLACNVRWBBIREPBBVFEXOSCDYGZWPFDTKFQIYCWHJVLNHIQIBTKHJVNPIST'''
-
     vigen = Cifrario_Viginere()
     ca = CrittoAnalisi()
     
-    # print(ca.kasiski_test(testo))
+    KAS = ca.kasiski_test(testo)
+    start = 2
+    end = 10
+    BEC: list = ca.best_index_of_coincidence(testo,start,end)
+    
+ 
+    # key_lenght_1 =  #da definire
+    key_lenght_2 = BEC.index(max(BEC)) + 2
 
-    print(ca.best_index_of_coincidence(testo,2,10))
-    K = ca.guess_g_(testo,6)
+    K = ca.guess_g_(testo,key_lenght_2)
     print(K)
     vigen.set_K(K)
     print(vigen.D(testo))
