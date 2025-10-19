@@ -20,8 +20,11 @@ class Cifrario_Viginere:
             return self.a[c_value].lower()
 
 
-    K = K("VERME")
+    K = K("")
 
+    def set_K(self, K):
+        self.K.value = K
+    
     def E(self,m):
         R = []
         for i,m_ in enumerate(m):
@@ -97,7 +100,6 @@ class CrittoAnalisi:
         ret = list(sorted(list(freq.items()), key=lambda x: len(x[0]), reverse=True))
         
         # Prendiamo le posizioni dei tesi, e calcoliamo MCD con le distanze 
-
         MCDs = []
         for i in range(len(ret)):
             e = ret[i][1]
@@ -120,8 +122,8 @@ class CrittoAnalisi:
         return substrings
 
     # Per indovinare la chiave è necessario sapere la lunghezza prima
-    # DA FIXARE
     def guess_g_(self,M,d):
+        key = []
         n_primo = len(M) / d
         
         # Calcolo M_g
@@ -129,21 +131,23 @@ class CrittoAnalisi:
         for sub in subs:
             text_freq = self.count_freq(sub)
 
-            # normalizzo frequenze tra 0 e 1
-            f_len = len(list(text_freq.items()))
-            for i in text_freq.items():
-                text_freq[i[0]] = i[1] / f_len
             max_,letter = 0,0
             for g in range(26):
-                v = 0
+                M_g = 0
                 for i,a in enumerate(self._a):
-                    c = chr(((i + g) % 26) + 65)
-                    v += ((self.freq_english[a] * text_freq[c]))/ (n_primo)  
-                if(v > max_):
-                    v = max_
+                    c = chr(((i + g) % 26) + ord('A'))
+                    M_g += ((self.freq_english[a] * text_freq[c]))
+                M_g /= (n_primo)
+
+                if(M_g > max_):
+                    max_ = M_g
                     letter = g
-            print(letter)
-                    
+                print(M_g)
+            print()
+            key.append(chr(letter + ord('A')))
+
+        return "".join(key)
+
     def best_index_of_coincidence(self,M,min_len,max_len):
         totale = []
         for i in range(min_len,max_len):
@@ -172,7 +176,9 @@ if __name__ == "__main__":
 
     vigen = Cifrario_Viginere()
     ca = CrittoAnalisi()
-    print(ca.kasiski_test(testo))
-    print(ca.best_index_of_coincidence(testo,2,10))
-    ca.guess_g_(testo,6) 
+    # print(ca.kasiski_test(testo))
+    # print(ca.best_index_of_coincidence(testo,2,10))
+    K = ca.guess_g_(testo,6) 
     # print(vigen.D(testo))
+    vigen.set_K(K)
+    print(vigen.D(testo))
