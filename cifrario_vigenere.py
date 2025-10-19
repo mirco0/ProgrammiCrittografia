@@ -108,7 +108,7 @@ class CrittoAnalisi:
                 nums.append(j - e[0])
             MCDs.append(reduce(gcd,nums))
 
-        return ret
+        return (ret,MCDs)
 
     # divide una stringa in d sottostringhe con gli elementi
     # y1 = y1ym+1y2m+1··· 
@@ -142,7 +142,7 @@ class CrittoAnalisi:
                 if(M_g > max_):
                     max_ = M_g
                     letter = g
-                print(M_g)
+                print(f"{M_g:.4f}")
             print()
             key.append(chr(letter + ord('A')))
 
@@ -157,13 +157,15 @@ class CrittoAnalisi:
                 sub.append(self.index_of_coincidence(subs))
             totale.append(sub)
 
+        # Calcola la media
         for i in range(len(totale)):
             totale[i] = sum(totale[i]) / len(totale[i])
+
         return totale
     
     #Indice di coincidenza per una singola stringa 
     def index_of_coincidence(self,M):
-        print(f"M{M}\n")
+        # print(f"M{M}\n")
         n = len(M)
         f = self.count_freq(M)
         sum_ = 0
@@ -176,9 +178,11 @@ if __name__ == "__main__":
 
     vigen = Cifrario_Viginere()
     ca = CrittoAnalisi()
+    
     # print(ca.kasiski_test(testo))
-    # print(ca.best_index_of_coincidence(testo,2,10))
-    K = ca.guess_g_(testo,6) 
-    # print(vigen.D(testo))
+
+    print(ca.best_index_of_coincidence(testo,2,10))
+    K = ca.guess_g_(testo,6)
+    print(K)
     vigen.set_K(K)
     print(vigen.D(testo))
