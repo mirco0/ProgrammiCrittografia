@@ -1,83 +1,59 @@
 from perm import perm
 
-#TODO: creare implementazione che lavora con dati in binario (più efficiente)
 class Cifrario_SPN:
     
-    K = [
-        [0,0,1,1,1,0,1,0,1,0,0,1,0,1,0,0],
-        [1,0,1,0,1,0,0,1,0,1,0,0,1,1,0,1],
-        [1,0,0,1,0,1,0,0,1,1,0,1,0,1,1,0],
-        [0,1,0,0,1,1,0,1,0,1,1,0,0,0,1,1],
-        [1,1,0,1,0,1,1,0,0,0,1,1,1,1,1,1]
-    ]
-    
-    class Key:
-        pass
-    
-    def xor(self,a,b):
-        c = []
-        for i in range(len(a)):
-            v = 0 if str(a[i]) == str(b[i]) else 1 
-            c.append(v)
-        return c
+    @staticmethod
+    def xor(a,b):
+        return a ^ b
 
     def generate_key_schedule(self):
         pass
     
-    # pag 106
-    def s(self,x):
-        s = []
-        for i,c in enumerate(x):
-            if(i % 4 == 0):
-                s.append(' ')
-            s.append(str(c))
-        return ''.join(s)
+    def get_value(self, v):
+        bits = f'{v:0{self.l * self.m}b}'
+        return ' '.join(bits[i:i+self.l] for i in range(0, len(bits), self.l))
 
+    # pag 106
     def SPN(self,x):
-        N = self.N
         w = x
         
         for r in range(0,self.N-1):
-            v = []
-            print(f"w_{r} {self.s(w)}")
-            print(f"K_{r+1} {self.s(self.K[r])}")
-            u = self.xor(w,self.K[r])
-            print(f"u_{r+1} {self.s(u)}")
-
-            for i in range(0,self.m):
-                sottolista = u[(i*self.l):(i+1)*self.l]
-                stringa = ''.join(map(str,sottolista))
-                sost = self.Ps.get_item(stringa)
-                v.extend(list(sost))
+            print(f"w_{r} {self.get_value(w)}")
+            print(f"K_{r+1} {self.get_value(self.K[r])}")
             
-            w = []
-            for index in range(len(v)):
-                # Sistema sfasamento tra la funzione di permutazione 1-16 e gli indici python 0-15
-                j = self.Pp.get_item(index) 
-                w.append(v[j])
+            u = self.xor(w,self.K[r])
+            
+            print(f"u_{r+1} {self.get_value(u)}")
 
-            print(f"v_{r+1} {self.s(v)}")
+            # Sostituzione
+            v = 0
+            for i in range(0,self.m):
+                block = (u >> (i*self.l) ) & ((1 << self.l) - 1)
+                subst = self.Ps.get_item(block)
+                v |= (subst << (self.l * i))    
+
+            # Permutazione
+            w = 0
+            for i in range(self.l * self.m):
+                bit = (v >> i) & 1
+                j = self.Pp.get_item(i)
+                w |= (bit << j)
+            
+            print(f"v_{r+1} {self.get_value(v)}")
         
-        v = []
-        u = self.xor(w,self.K[N-1])
-        print(f"K_{N} {self.s(self.K[N-1])}")
-        # exit(0)
+        u = self.xor(w,self.K[self.N-1])
+        print(f"K_{self.N} {self.get_value(self.K[self.N-1])}")
 
-
+        v = 0
         for i in range(0,self.m):
-            sottolista = u[(i*self.l):(i+1)*self.l]
-            stringa = ''.join(map(str,sottolista))
-            sost = self.Ps.get_item(stringa)
-            v.extend(list(sost))
-        
-        print(f"v_{N} {self.s(v)}")
+            block = (u >> (i*self.l) ) & ((1 << self.l) - 1)
+            subst = self.Ps.get_item(block)
+            v |= (subst << (self.l * i))
 
-        # print(v)
-        print(f"K_{N+1} {self.s(self.K[N])}")
-        return self.xor(v,self.K[N])
-            # print()
-            # for j in range(1,self.l * self.m +1):
-            #     w[r].append(self.Pp.get(v[r])) 
+        print(f"v_{self.N} {self.get_value(v)}")
+        print(f"K_{self.N+1} {self.get_value(self.K[self.N])}")
+
+        return self.xor(v,self.K[self.N])
 
 
     def __init__(self,N,l,m):
@@ -86,4 +62,4 @@ class Cifrario_SPN:
         self.Ps = perm()
         self.N = N
         self.l = l
-        self.m = m
+        self.m = m 

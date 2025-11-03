@@ -26,8 +26,11 @@ PS = {
 # trasforma le permutazioni per lavorare con le stringhe binarie al posto delle stringhe esadecimali
 PS1 = {}
 for a in PS.items():
-    k = f'{int(a[0],16):0>4b}'
-    v = f'{int(a[1],16):0>4b}'
+    # k = f'{int(a[0],16):0>4b}'
+    k = int(a[0],16)
+    v = int(a[1],16)
+
+    # v = f'{int(a[1],16):0>4b}'
     PS1[k] = v
 
 PP = {
@@ -59,7 +62,15 @@ for a in PP.items():
 cifrario.Ps.set_key(PS1)
 cifrario.Pp.set_key(PP1)
 
-plain_text = [0,0,1,0,0,1,1,0,1,0,1,1,0,1,1,1]
+plain_text = 0b0010011010110111
 
-print(f" y {cifrario.s(cifrario.SPN(plain_text))}")
-# print(cifrario.xor(a,b))
+
+K = [
+    0b0011101010010100,
+    0b1010100101001101,
+    0b1001010011010110,
+    0b0100110101100011,
+    0b1101011000111111
+]
+cifrario.K = K
+print(f" y {cifrario.get_value(cifrario.SPN(plain_text))}")
