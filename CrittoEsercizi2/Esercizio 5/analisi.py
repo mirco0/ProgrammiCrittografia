@@ -39,12 +39,12 @@ table = cr.genera_SBOX_table(PI_S)
 
 # Tabella SBOX in latex
 header=["$X_1$","$X_2$","$X_3$","$X_4$","$Y_1$","$Y_2$","$Y_3$","$Y_4$"]
-cr.latex_table(table,name="perm_table.tex",header=header)
+cr.latex_table(table,name="tables/perm_table.tex",header=header)
 
 #Tabella linear approximation in latex
 linear_app = cr.calcola_NL_table(table)
 header=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
 side=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
-cr.latex_table(linear_app,name="linear_approximation.tex",header=header,side=side)
+cr.latex_table(linear_app,name="tables/linear_approximation.tex",header=header,side=side)
 
 
