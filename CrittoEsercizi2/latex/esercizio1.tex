@@ -1,1 +1,29 @@
-.
+\begin{centering}
+    Dimostrare che il polinomio $x^8 + x^4 + x^3 + x + 1$ è irriducibile su $\mathbb{F}_2$
+\end{centering}
+
+\vspace{0.5cm}
+Per dimostrare che $P = x^8 + x^4 + x^3 + x + 1$ dimostriamo che $P$ non ha radici in $\mathbb{F}_2, \mathbb{F}_4, \mathbb{F}_{16}$.
+Si ricorda che $\forall a \in \mathbb{F}_{p^m}$ $a$ è radice di $X^{p^m} -X$ ovvero 
+$X{p^n}-X$ è esattamente il prodotto di tutti i polinomi monici irriducibili in $F_p[X]$ il cui grado $k$ divide $n$. (In questo caso )
+
+Si fa riferimento alla proposizione \textbf{1.17}
+
+Per cui è sufficiente verificare che 
+\begin{enumerate}
+    \item $(X^2-X)$, $(X^{2^2}-X)$, $(X^{2^4}-X)$ non hanno fattori in comune con $P$ (effettuato con l'algoritmo euclideo per polinomi dal libro S.P.) 
+    \item $X^{2^8} \equiv X \mod P$
+\end{enumerate}
+
+\begin{proof}
+
+Per svolgere il passo \textit{(1)} si fa uso dell'algoritmo euclideo\\
+\input{algo_euclideo.tex}
+
+Si continua verificando che $X^{256} \equiv X$\\
+\input{congruenza.tex}
+
+Entrambi i punti sono stati soddisfatti, $P$ è irriducibile su $\mathbb{F}_2$ 
+\end{proof}
+
+% \end{proof}

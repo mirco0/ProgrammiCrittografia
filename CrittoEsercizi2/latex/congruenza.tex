@@ -1,0 +1,74 @@
+\[
+P(x)=x^8+x^4+x^3+x+1, \qquad 
+x^8 \equiv x^4+x^3+x+1 \pmod{P}.
+\]
+
+Il nostro obiettivo è mostrare che:
+\[
+x^{256} \equiv x \pmod{P}.
+\]
+
+\section*{Calcolo delle potenze successive}
+
+\subsection*{1. Potenza \(x^{16}\)}
+\[
+x^{16} = (x^8)^2 \equiv (x^4+x^3+x+1)^2.
+\]
+Sviluppando:
+\[
+(x^4+x^3+x+1)^2 = x^8 + x^6 + x^2 + x.
+\]
+Sostituendo \(x^8 \equiv x^4+x^3+x+1\):
+\[
+x^{16} \equiv x^6 + x^4 + x^3 + x^2 + x.
+\]
+
+\subsection*{2. Potenza \(x^{32}\)}
+\[
+x^{32} = (x^{16})^2 = (x^6+x^4+x^3+x^2+x)^2.
+\]
+Dopo l'espansione e la riduzione modulo \(P\):
+\[
+x^{32} \equiv x^7 + x^6 + x^5 + x^2.
+\]
+
+\subsection*{3. Potenza \(x^{64}\)}
+\[
+x^{64} = (x^{32})^2 = (x^7+x^6+x^5+x^2)^2.
+\]
+Riducendo:
+\[
+x^{64} \equiv x^6 + x^3 + x^2 + 1.
+\]
+
+\subsection*{4. Potenza \(x^{128}\)}
+\[
+x^{128} = (x^{64})^2 = (x^6+x^3+x^2+1)^2.
+\]
+Semplificando:
+\[
+x^{128} \equiv x^7 + x^6 + x^5 + x^4 + x^3 + x.
+\]
+
+\subsection*{5. Potenza finale \(x^{256}\)}
+\[
+x^{256} = (x^{128})^2 = (x^7+x^6+x^5+x^4+x^3+x)^2.
+\]
+Effettuando l'espansione e applicando la sostituzione per \(x^8\):
+\[
+\boxed{
+x^{256} \equiv x \pmod{P}.
+}
+\]
+
+\section*{Nota sulle riduzioni intermedie}
+Esempi utili:
+\[
+x^{12} = x^4 x^8 \equiv x^4 (x^4+x^3+x+1)
+        = x^7 + x^5 + x^4 + x^3 + x,
+\]
+\[
+x^{14} = x^{12}x^2, \qquad
+x^{10} = x^8 x^2.
+\]
+

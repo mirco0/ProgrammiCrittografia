@@ -46,5 +46,3 @@ linear_app = cr.calcola_NL_table(table)
 header=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
 side=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
 cr.latex_table(linear_app,name="tables/linear_approximation.tex",header=header,side=side)
-
-

@@ -1,0 +1,83 @@
+\subsection{4.4 Stinsion Paterson}
+\textit{Nota: tutto il codice di AES è implementato nel file AES.py, le righe fanno riferimento a quel file. Invece il codice può essere eseguito dal file esercizio6.py per lo svolgimento dell'esercizio}
+
+
+Sia una chiave \textit{AES} a $128$ bit in notazione esadecimale. 
+\begin{verbatim}
+    2B7E151628AED2A6ABF7158809CF4F3C
+\end{verbatim}
+Costruire un \textit{key-schedule}
+
+\subsection{Soluzione: }
+\textit{N.B. Per verificare i passaggi dell'esercizio è stato usato il seguente \href{https://legacy.cryptool.org/en/cto/aes-step-by-step
+}{sito web}}\\
+Seguendo le indicazioni del libro, si deve calcolare la \textbf{expanded key} per $N$ round, si ha bisogno di una chiave di $4 \cdot (N+1)$  Word \textit{(una word sono 4 byte)}.
+\vspace{0.5cm}
+È possibile calcolare la expanded key con le seguenti funzioni:
+\begin{center}
+    $\text{RotWord}(B_0,B_1,B_2,B_3) = (B_1,B_2,B_3,B_0)$\\
+    $\text{SubWord}(B_0,B_1,B_2,B_3) = (B_0',B_1',B_2',B_3')$\\
+\end{center}
+
+RotWord rappresenta una rotazione delle word a sinistra. è implementata con la funzione \textit{RotWord} nel codice alla riga 54\\
+SubWord rappresenta un'applicazione della SBOX  è implementata con la funzione \textit{SubWord} nel codice alla riga 44\\
+
+
+N.B. La funzione rappresentata dalla SBOX è in realtà una serie di operazioni in $\mathbb{F}_2$, è però possibile implementarle senza toccare i campi, anche attraverso una lookup table (come in questo caso).
+% In questo caso $B_i' = SBOX(B_i) \forall i \in \{0,1,2,3\}$
+
+A riga 58 del codice è presente la funzione \textit{KeyExpansion} che fa uso di funzioni ausiliarie per rimanere fedele allo pseudocodice fornito dal libro.
+Ovvero la funzione \textit{KeyAtByteNumber} permette di recuperare \textit{l'i-esimo} byte, la funzione \textit{MergeBytes} permette di concatenare (attraverso operazioni di shift e or tra bit) i 4 byte in una stringa di 32 bit consecutivi.
+
+Operando come spiegato da libro si ottiene il \textit{Key-schedule} seguente
+
+\vspace{0.5cm}
+
+\begin{table}[h]   
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Word 1& Word 2 & Word 3 & Word 4\\
+        \hline
+        2B7E1516 & 28AED2A6 & ABF71588 & 09CF4F3C\\
+        A0FAFE17 & 88542CB1 & 23A33939 & 2A6C7605\\
+        F2C295F2 & 7A96B943 & 5935807A & 7359F67F\\
+        3D80477D & 4716FE3E & 1E237E44 & 6D7A883B\\
+        EF44A541 & A8525B7F & B671253B & DB0BAD00\\
+        D4D1C6F8 & 7C839D87 & CAF2B8BC & 11F915BC\\
+        6D88A37A & 110B3EFD & DBF98641 & CA0093FD\\
+        4E54F70E & 5F5FC9F3 & 84A64FB2 & 4EA6DC4F\\
+        EAD27321 & B58DBAD2 & 312BF560 & 7F8D292F\\
+        AC7766F3 & 19FADC21 & 28D12941 & 575C006E\\
+        D014F9A8 & C9EE2589 & E13F0CC8 & B6630CA6\\
+        \hline
+\end{tabular}
+\end{table}
+
+\newpage
+\subsection{4.5 Stinsion Paterson}
+
+Calcola l'encryption usando 2 round di \textit{AES} del seguente plaintext espresso in notazione esadecimale.
+\begin{verbatim}
+    3243F6A8885A308D313198A2E0370734
+\end{verbatim}
+
+Come in precedenza tutte le funzioni necessarie per l'esecuzione corretta dell'algoritmo sono state riprodotte in modo più fedele possibile al libro.
+
+Dopo aver effettuato la key \textbf{key expansion}, si parte con l'encryption, prendendo una chiave per volta per round. 
+
+\begin{itemize}
+    \item Si esegue una sostituzione con la sbox, come descritto in precedenza.
+    \item Shift rows manipola lo stato come descritto dallo standard
+    \item Si esegue mix columns
+    \item Avviene lo xor bit a bit con la chiave del round
+\end{itemize}
+
+Per ogni passaggio il codice scritto stampa lo stato corrente. Infine la funzione di encrypt restituisce il testo cifrato.
+
+Dopo 2 round il testo è
+
+\begin{verbatim}
+    BB1912C93FAFEACA2637528B04876065
+\end{verbatim}
+
