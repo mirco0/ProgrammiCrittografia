@@ -1,0 +1,28 @@
+import math
+from Gruppi import Group
+
+def algo_shanks(G: Group,n,a,b):
+    m = int(math.ceil(math.sqrt(n)))
+    # Modifico il codice del libro per usare i dizionari per un accesso più rapido
+    L1 = {}
+    L2 = {}
+    
+    for j in range(m):
+        val = G.exp(a,m*j)
+        # l = (j,val)
+        L1[val] = j
+
+    # L1.sort(key= lambda x: x[1])
+
+    for i in range(m):
+        val = (b * G.exp(a,-i)) % n
+        l = (i,val)
+        L2[val] = i
+        # L2.append(l)
+
+    # L2.sort(key= lambda x: x[1])
+    for l in L1.items():
+        if l[0] in L2:
+            j = l[1]
+            i = L2[l[0]]
+            return (m*j + i) % n
