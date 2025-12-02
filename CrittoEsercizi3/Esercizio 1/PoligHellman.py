@@ -27,6 +27,7 @@ def fattorizzazione(n):
         N[n] = dict(fattori)
         return fattori
 
+#TODO: da finire da implementare
 def algo_pohlig_hellman(G,n,a,b,q,c):
     B = [ 0 for _ in range(c)]
     B[0] = b
