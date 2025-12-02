@@ -1,10 +1,11 @@
 from Shanks import algo_shanks
+from Gruppi import Group
+
 #Prende un intero n e restituisce un dizionario con 
 # chiave = fattore primo    (q)
 # valore = esponente        (c)
 
 N = {}
-
 def fattorizzazione(n):
     if n == 1:
         return {}
@@ -27,20 +28,33 @@ def fattorizzazione(n):
         N[n] = dict(fattori)
         return fattori
 
-#TODO: da finire da implementare
 def algo_pohlig_hellman(G,n,a,b,q,c):
-    B = [ 0 for _ in range(c)]
+    A = [ 0 for _ in range(c)]
+    print(A)
+    B = [ 0 for _ in range(c+1)]
     B[0] = b
     for j in range(c):
-        delta = G.exp(B[j],n/G.exp(q,j+1))
+        exp = G.exp(q,j+1)
+        delta = G.exp(B[j],int((n-1)/exp))
+        # print(f"delta:{delta} = (Bj){B[j]}^({n-1}/{exp})")
+
         #Trova i tale che delta = alpha^in/q con l'algoritmo di shanks
-        i = algo_shanks(G,G.exp(a,n/q),delta)
+
+        n_su_q = G.exp(a,int((n-1)/q))
+        # print(f"Calcolando log_{n_su_q}({delta}) = ")
+        i = algo_shanks(G,n,n_su_q,delta)
+        # print(f"i:{i} =  al{a}^i({n-1}/{q})")
 
         A[j] = i
-        B[j+1] = B[j] * G.exp(a,-A[j]*G.exp(q,j))
+
+        termine1 = A[j]
+        termine2 = G.exp(q,j)
+
+        B[j+1] = G.mul(B[j], G.exp(a,-G.mul(termine1,termine2)))
+
     return A
 
-# def pohlig_algo_(G,n,a,b):
-#     fattori = fattorizzazione(n)
-    # for():
-        
+def pohlig_algo_(G,n,a,b):
+    fattori = fattorizzazione(n-1)
+    for i in fattori.items():
+        p  = algo_pohlig_hellman(G,n,a,b,i[0],i[1])

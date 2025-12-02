@@ -8,6 +8,9 @@ class Group:
             return self.inverse(self.exp(base,-power))
         return (base ** power) % self.n
     
+    def mul(self, a, b):
+        return (a*b) % self.n
+
     def inverse(self, a):
     # Algoritmo euclideo
         n = self.n

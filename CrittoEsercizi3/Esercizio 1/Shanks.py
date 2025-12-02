@@ -9,18 +9,15 @@ def algo_shanks(G: Group,n,a,b):
     
     for j in range(m):
         val = G.exp(a,m*j)
-        # l = (j,val)
-        L1[val] = j
-
-    # L1.sort(key= lambda x: x[1])
+        if val not in L1:
+            L1[val] = j
 
     for i in range(m):
-        val = (b * G.exp(a,-i)) % n
+        val = G.mul(b,G.exp(a,-i))
         l = (i,val)
-        L2[val] = i
-        # L2.append(l)
+        if val not in L2:
+            L2[val] = i
 
-    # L2.sort(key= lambda x: x[1])
     for l in L1.items():
         if l[0] in L2:
             j = l[1]
