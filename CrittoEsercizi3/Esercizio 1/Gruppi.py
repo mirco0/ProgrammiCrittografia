@@ -1,7 +1,12 @@
 # Implementazione semplice per esponenziazione e inversa moltiplicativa
 class Group:
+
     def __init__(self, n):
         self.n = n
+
+    #TODO: da fare
+    def square_and_multiply(self,base,power):
+        pass
 
     def exp(self, base, power):
         if (power < 0):

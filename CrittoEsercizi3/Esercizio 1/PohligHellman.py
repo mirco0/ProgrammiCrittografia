@@ -29,23 +29,23 @@ def fattorizzazione(n):
         return fattori
 
 def algo_pohlig_hellman(G,n,a,b,q,c):
-    A = [ 0 for _ in range(c)]
-    print(A)
+    A = []
     B = [ 0 for _ in range(c+1)]
     B[0] = b
     for j in range(c):
         exp = G.exp(q,j+1)
-        delta = G.exp(B[j],int((n-1)/exp))
+        delta = G.exp(B[j],n//exp)
         # print(f"delta:{delta} = (Bj){B[j]}^({n-1}/{exp})")
 
         #Trova i tale che delta = alpha^in/q con l'algoritmo di shanks
 
-        n_su_q = G.exp(a,int((n-1)/q))
-        # print(f"Calcolando log_{n_su_q}({delta}) = ")
-        i = algo_shanks(G,n,n_su_q,delta)
+        a_n_su_q = G.exp(a,n//q)
+        
+        # print(f"Calcolando log_{a_n_su_q}({delta}) = ")
+        i = algo_shanks(G,n,a_n_su_q,delta)
         # print(f"i:{i} =  al{a}^i({n-1}/{q})")
 
-        A[j] = i
+        A.append(i)
 
         termine1 = A[j]
         termine2 = G.exp(q,j)
@@ -54,7 +54,23 @@ def algo_pohlig_hellman(G,n,a,b,q,c):
 
     return A
 
-def pohlig_algo_(G,n,a,b):
-    fattori = fattorizzazione(n-1)
+# Usando il teorema cinese del resto
+
+def algo_pohlig(G,n,a,b):
+    fattori = fattorizzazione(n)
+    eq = []
     for i in fattori.items():
         p  = algo_pohlig_hellman(G,n,a,b,i[0],i[1])
+        a_ = 0
+        for j in range(i[1]):
+            a_+= G.mul( p[j], G.exp(i[0],j)) + i[0]**i[1]
+
+        eq.append((a_,i[0]**i[1]))
+
+    x = 0
+    for r, m in eq:
+        Mi = n // m
+        G = Group(m)
+        inv = G.inverse(Mi)
+        x += r * Mi * inv
+    return x % n
