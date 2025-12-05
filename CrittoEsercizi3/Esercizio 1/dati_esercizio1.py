@@ -49,8 +49,8 @@ def scrivi_dati_es7_1(file):
     with open(f"{file}_1.tex","w") as f:
     
         f.write(f"\\begin{{center}}\n\t\\begin{{tabular}}[h]{{*{{{cols}}}{{c}}}}\n    ")
-        for i,pair in enumerate(L2):
-            dato = (L2[pair],pair)
+        for i,pair in enumerate(L1):
+            dato = (L1[pair],pair)
             if dato[1] == collision:
                 f.write(f"$\\mathbf{{{dato}}}$")
             else:

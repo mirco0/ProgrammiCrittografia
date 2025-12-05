@@ -12,10 +12,10 @@ per la classe \texttt{Gruppo} modulo $p$ (numero primo)
 \noindent
 Con queste funzioni è banale mettere in pratica l'algoritmo di \textit{Shanks}, è possibile visionare il codice nel file \texttt{Crittoesercizi3/Esercizio 1/Shanks.py}\\
 \noindent
-\textbf{N.B.} L'algoritmo seguente fa uso di dizionari (strutture dati, che in python hanno una complessità di \textit{lookup} $O(1)$)
+\textbf{N.B.} L'algoritmo seguente fa uso di dizionari (strutture dati, che in python hanno una complessità di \textit{lookup} $O(1)^*$\footnote{Costo ammortizzato})
 
 \subsubsection*{Calcolo logartimo discreto}
-Qui segue l'esecuzione dell'algoritmo per il primo logarimo discreto dell'esercizio:
+Qui segue l'esecuzione dell'algoritmo per il primo punto dell'esercizio:
 Si ha $\alpha  = 106,n = 24690, \beta= 12375$, per cui $m = \lceil \sqrt{24691} \rceil = 158$. 
 Proseguendo $\alpha^{158} \mod 24691 = 24689$.\\
 \newpage
@@ -25,8 +25,13 @@ La seconda lista contiene le coppie $(i,12375 \cdot 106^{-i} \mod 24691) \; \for
 \input{tables/es1_2.tex}
 Da queste due tabelle si notano le coppie $(141,19999)$ e $(114,19999)$ che hanno una collisione. Per cui il valore del logaritmo discreto cercato è
 \[
-    \log_{106}(12375) = (158 \cdot 141 + 114) \mod 24691 = 22392
+    \log_{106}(12375) = (158 \cdot 141 + 114) \mod 24691 = \fbox{22392}
+\]
+\newpage
+Analogamente si procede con il secondo punto dell'esercizio, ovvero il calcolo di $\log_6(248388)$ in ${\mathbb{Z}_{458009}}$, non presentando in modo esplicito le coppie, ma brevemente i passaggi.\\
+Si ha $\alpha  = 6,n = 458009, \beta= 248388$, per cui $m = \lceil \sqrt{458009} \rceil = 677$. $\alpha^{677} \mod 458009 = 186889$. In questo caso le coppie che conicidono sono $(343, 157943)$ e $(625, 157943)$, il valore del logaritmo discreto cercato è
+\[
+    \log_{6}(248388) = (677 \cdot 343 + 625) \mod 458009 = \fbox{232836}
 \]
 
-Analogamente si procede con il secondo punto dell'esercizio, ovvero il calcolo di $\log_6(248388)$ in ${\mathbb{Z}_{458009}$, 
 \subsection{7.5 Stinson-Paterson}
