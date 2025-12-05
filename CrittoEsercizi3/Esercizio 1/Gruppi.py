@@ -4,14 +4,20 @@ class Group:
     def __init__(self, n):
         self.n = n
 
-    #TODO: da fare
-    def square_and_multiply(self,base,power):
-        pass
+    def square_and_multiply(self, a, b):
+        result = 1
+        x = a
+        while b > 0:
+            if b % 2 == 1:
+                result = self.mul(x,result)
+            x = self.mul(x,x)
+            b //= 2
+        return result
 
     def exp(self, base, power):
         if (power < 0):
             return self.inverse(self.exp(base,-power))
-        return (base ** power) % self.n
+        return self.square_and_multiply(base,power) % self.n
     
     def mul(self, a, b):
         return (a*b) % self.n
