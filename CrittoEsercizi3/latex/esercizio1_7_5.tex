@@ -19,7 +19,7 @@ con $a\mod {p_i}^{c_i} \; \forall i = 1,\dots,k$.
 \subsubsection*{Calcolo logartimo discreto}
 Si descrivono brevemente i dati del primo punto dell'esercizio $\log_{5}(8563)$ in ${\mathbb{Z}_{28703}}$, per cui $\alpha = 5,n = 28702, \beta = 8563$. La fattorizzazione di $n$ è $28702 = 113^1 \cdot 127^1 \cdot 2^1$.
 
-\noindent
+\subsubsection{Esecuzione dell'algoritmo}
 \input{tables/es1_5.tex}
 \textbf{N.B.} Il calcolo di $a$ dalle variabili $a_i$ ottenute dalle diverse iterazioni è stato omesso in quanto banale ($ a= \sum_{i = 0}^{c-1}a_iq^i$)
 Ponendo le soluzioni ottenute a sistema si ottiene:
@@ -45,3 +45,31 @@ Secondo il teorema
 \]
 $a$ è soluzione del sistema (\ref{eq:1})\\
 $a = (67 \cdot 254 \cdot 109 ) + ( 1 \cdot 14351 \cdot 1) +  ( 99 \cdot 226 \cdot 68) = \fbox{3909 mod 28702}$
+
+\vspace{1.5cm}
+\noindent
+Passando ora al secondo punto dell'esercizio, ovvero il calcolo di $\log_{10}(12611)$ in ${\mathbb{Z}_{31153}}$. In questo caso verranno sorvolati alcuni passaggi visti in precedenza, al contrario si enfatizza l'esecuzione del codice in quanto $n$ ha una fattorizzazione più interessante. $\alpha = 10, n = 31152, \beta = 12611$. La fattorizzazione di $n$ è $31152 = 59^1 \cdot 3^1 \cdot 2^4 \cdot 11^1$
+
+\subsection{Esecuzione dell'algoritmo}
+\input{tables/es1_5_2.tex}
+Da come si può notare, in questo caso il calcolo di $a$ ($ a= \sum_{i = 0}^{c-1}a_iq^i$) per le singole esecuzioni sui diversi fattori non è banale. Segue un breve calcolo delle diverse a per la creazione del sistema
+
+\begin{align*}
+    a &= 51 \cdot 59^0 = 51 \\
+    a &= 2 \cdot 3^0 = 2\\
+    a &= 0 \cdot 2^0 + 1 \cdot 2^1 + 1 \cdot 2^2 + 1 \cdot 2^3 = 14\\
+    a &= 8 \cdot 11^0 = 8\\
+\end{align*}
+
+Si ottiene il sistema 
+
+\begin{equation}
+    \label{eq:2}
+    \begin{cases}
+        a \equiv 51 \mod 59\\
+        a \equiv 2 \mod 3\\
+        a \equiv 14 \mod 16\\
+        a \equiv 8 \mod 11
+    \end{cases}
+\end{equation}
+E applicando il teorema cinese del resto \\$a = ( 51\cdot 528\cdot 39) + ( 2\cdot 10384\cdot 1) + ( 14\cdot 1947\cdot 3) + ( 8\cdot 2832\cdot 9) = \fbox{17102 mod 31152}$

@@ -88,18 +88,34 @@ def scrivi_dati_es7_5(file):
         b = 5
         y = 8563
 
-        # p = 31153
-        # b = 10
-        # y = 12611
-        # p = 29
-        # b = 2
-        # y = 18
-        
         G = Group(p)
         variables = capture_locals(algo_pohlig,G,p-1,b,y)
-        print(variables[1]["var"])
+
+        # Punto 1 dell'esercizio
         for j,dati in enumerate(variables[1]["var"]):
-            # pass
+            f.write(f"Test per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
+            f.write("\\begin{center}\n    \\begin{tabular}{@{}lccl@{}}\n        \\toprule\n        Step & Variabile & & Valore \\\\ \n        \\midrule\n        ")
+            for index,variabili in enumerate(dati):
+                f.write(f"        {index} & $\\beta_{{{index}}}$ & $=$ &${variabili['beta_0']}$\\\\\n")
+                f.write(f"        &$\\delta$ & $=$ & ${{{variabili['beta_0']}^{{{variabili['n']}/{{{variabili['exp']}}}}}}}$\\\\\n")
+                f.write(f"        &$a_{{{index}}}$ & $=$ & ${variabili['i']}$\\\\\n")
+                f.write(f"        &$\\beta_{{{index+1}}}$ & $=$ & ${variabili['beta_1']}$\\\\\n")
+                if index != len(dati)-1:
+                    f.write(f"        \\midrule")
+            f.write("        \\bottomrule\n    \\end{tabular}\\end{center}\n")
+        
+        
+    # Punto 2 dell'esercizio
+    with open(f"{file}_2.tex","w") as f:
+        p = 31153
+        b = 10
+        y = 12611
+        
+
+        G = Group(p)
+        variables = capture_locals(algo_pohlig,G,p-1,b,y)
+
+        for j,dati in enumerate(variables[1]["var"]):
             f.write(f"Test per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
             f.write("\\begin{center}\n    \\begin{tabular}{@{}lccl@{}}\n        \\toprule\n        Step & Variabile & & Valore \\\\ \n        \\midrule\n        ")
             for index,variabili in enumerate(dati):
