@@ -30,37 +30,52 @@ def fattorizzazione(n):
 
 def algo_pohlig_hellman(G,n,a,b,q,c):
     A = []
-    B = [ 0 for _ in range(c+1)]
-    B[0] = b
+    B = b
+
+    #Per generare le tabelle latex relative all'esecuzione
+    
+    #(delta, i, a_j,B_j+1)
+    #Per ogni iterazione di j si inseriscono 
+    exe = []
+    
     for j in range(c):
-        exp = G.exp(q,j+1)
-        delta = G.exp(B[j],n//exp)
-        # print(f"delta:{delta} = (Bj){B[j]}^({n-1}/{exp})")
 
-        #Trova i tale che delta = alpha^in/q con l'algoritmo di shanks
-
-        a_n_su_q = G.exp(a,n//q)
+        #Variabile per tabella latex (dizionario delle variabili)
+        var = {}
         
-        # print(f"Calcolando log_{a_n_su_q}({delta}) = ")
+        exp = G.exp(q,j+1)
+        delta = G.exp(B,n//exp)
+        
+        var["n"] = n
+        var["exp"] = exp
+        var["beta_0"] = B
+
+        # Trova i tale che delta = alpha^in/q con l'algoritmo di shanks
+        
+        a_n_su_q = G.exp(a,n//q)
         i = algo_shanks(G,n,a_n_su_q,delta)
-        # print(f"i:{i} =  al{a}^i({n-1}/{q})")
-
+        
+        var["i"] = i
+        
         A.append(i)
-
+        
         termine1 = A[j]
         termine2 = G.exp(q,j)
 
-        B[j+1] = G.mul(B[j], G.exp(a,-G.mul(termine1,termine2)))
-
-    return A
+        B = G.mul(B, G.exp(a,-G.mul(termine1,termine2)))
+        var["beta_1"] = B
+        exe.append(var)
+    return exe,A
 
 # Usando il teorema cinese del resto
 
 def algo_pohlig(G,n,a,b):
     fattori = fattorizzazione(n)
     eq = []
+    var = []
     for i in fattori.items():
-        p  = algo_pohlig_hellman(G,n,a,b,i[0],i[1])
+        v,p = algo_pohlig_hellman(G,n,a,b,i[0],i[1])
+        var.append(v)
         a_ = 0
         for j in range(i[1]):
             a_+= G.mul( p[j], G.exp(i[0],j)) + i[0]**i[1]

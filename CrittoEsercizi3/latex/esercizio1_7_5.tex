@@ -1,0 +1,40 @@
+Implementa l'algoritmo Pohlig-Hellman per trovare il logaritmo discreto in ${\mathbb{Z}_p}^*$. Con $p$ primo e $\alpha$ un elemento primitivo modulo $p$. Trova $\log_{5}(8563)$ in ${\mathbb{Z}_{28703}}$ e $\log_{10}(12611)$ in ${\mathbb{Z}_{31153}}$
+
+\subsection*{Soluzione}
+Per procedere con l'implementazione dell'algoritmo sono necessarie alcune funzioni correttamente implementate:
+\begin{itemize}
+    \item Algoritmo di fattorizzazione
+    \item Algoritmo di \textit{Shanks} per il calcolo di logaritmi discreti
+\end{itemize}
+
+L'algoritmo di fattorizzazione è visibile nel file \texttt{Crittoesercizi3/Esercizio 1/PohligHellman.py}, per semplicità e stato scritto in modo ricorsivo, e fa uso della programmazione dinamica per il calcolo immediato della fattorizzazione per input precedentemente visti.\\
+L'output è una lista di tuple $(p_0,c_0),\dots,(p_k,c_k)$ tale che  
+\[
+    n = \prod_{i = 0}^{k}{ {p_i}^{c_i}}
+\]
+
+Una volta ottenuta la fattorizzazione di $n$, il resto dell'implementazione, segue passo passo la teoria. Difatti il codice principale fa uso della fattorizzazione di $n$ per il calcolo di logaritmi discreti $a = \log_{\alpha}(\beta)$\\
+con $a\mod {p_i}^{c_i} \; \forall i = 1,\dots,k$.
+
+\subsubsection*{Calcolo logartimo discreto}
+Si descrivono brevemente i dati del primo punto dell'esercizio $\log_{5}(8563)$ in ${\mathbb{Z}_{28703}}$, per cui $\alpha = 5,n = 28702, \beta = 8563$. La fattorizzazione di $n$ è $28702 = 113^1 \cdot 127^1 \cdot 2^1$.
+
+\noindent
+\input{tables/es1_5.tex}
+\textbf{N.B.} Il calcolo di $a$ dalle variabili $a_i$ ottenute dalle diverse iterazioni è stato omesso in quanto banale ($ a= \sum_{i = 0}^{c-1}a_iq^i$)
+Ponendo le soluzioni ottenute a sistema si ottiene:
+
+\begin{equation*}
+    \begin{cases}
+        a \equiv 67 \mod 113\\
+        a \equiv 1 \ \mod 2\\
+        a \equiv 99 \mod 127
+    \end{cases}
+\end{equation*}
+Per il teorema cinese del resto la $a$ cercata si calcola con i seguenti passaggi. $n = 31152$, $\forall i = 1,\dots,k$ 
+\[
+    y_i = \frac{n}{n_i} \text{ ($n_i$ fattore di $n$)}
+\]
+\noindent
+Per cui $y_0 = \frac{28702}{113} = 254,\ y_1 = \frac{28702}{127} = 226,\ y_2 = \frac{28702}{2} = 14351$ successivamente si calcolano le inverse moltiplicative modulo $n_i$ ($z_i \equiv {y_{i}}^{-1}$). Si ottiene:
+$z_0 = 109,\ z_1 = 68,\ z_2 = 1$.

@@ -3,6 +3,7 @@
 import sys
 import math
 from Shanks import algo_shanks
+from PohligHellman import algo_pohlig
 from Gruppi import Group
 
 # Esercizio 1
@@ -32,12 +33,12 @@ def capture_locals(func, *args, **kwargs):
 
 def scrivi_dati_es7_1(file):
     
-    n = 24691
+    p = 24691
     b = 106
     y = 12375
 
-    G = Group(n)
-    variables = capture_locals(algo_shanks,G,n-1,b,y)
+    G = Group(p)
+    variables = capture_locals(algo_shanks,G,p-1,b,y)
     L1 = variables[1]["L1"]
     L2 = variables[1]["L2"]
     collision = variables[1]["collision"]
@@ -80,5 +81,35 @@ def scrivi_dati_es7_1(file):
                 f.write("&")
         f.write("\n\t\\end{tabular}\n\\end{center}")
 
+def scrivi_dati_es7_5(file):
+    with open(f"{file}.tex","w") as f:
+            
+        p = 28703
+        b = 5
+        y = 8563
 
-scrivi_dati_es7_1("../latex/tables/es1")
+        # p = 31153
+        # b = 10
+        # y = 12611
+        # p = 29
+        # b = 2
+        # y = 18
+        
+        G = Group(p)
+        variables = capture_locals(algo_pohlig,G,p-1,b,y)
+        print(variables[1]["var"])
+        for j,dati in enumerate(variables[1]["var"]):
+            # pass
+            f.write(f"Test per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
+            f.write("\\begin{center}\n    \\begin{tabular}{@{}lccl@{}}\n        \\toprule\n        Step & Variabile & & Valore \\\\ \n        \\midrule\n        ")
+            for index,variabili in enumerate(dati):
+                f.write(f"        {index} & $\\beta_{{{index}}}$ & $=$ &${variabili['beta_0']}$\\\\\n")
+                f.write(f"        &$\\delta$ & $=$ & ${{{variabili['beta_0']}^{{{variabili['n']}/{{{variabili['exp']}}}}}}}$\\\\\n")
+                f.write(f"        &$a_{{{index}}}$ & $=$ & ${variabili['i']}$\\\\\n")
+                f.write(f"        &$\\beta_{{{index+1}}}$ & $=$ & ${variabili['beta_1']}$\\\\\n")
+                if index != len(dati)-1:
+                    f.write(f"        \\midrule")
+            f.write("        \\bottomrule\n    \\end{tabular}\\end{center}\n")
+
+scrivi_dati_es7_5("../latex/tables/es1_5")
+# scrivi_dati_es7_1("../latex/tables/es1")
