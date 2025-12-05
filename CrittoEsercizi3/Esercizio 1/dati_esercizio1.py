@@ -46,7 +46,7 @@ def scrivi_dati_es7_1(file):
 
     #Generazione tabella 1
 
-    with open(f"{file}_2.tex","w") as f:
+    with open(f"{file}_1.tex","w") as f:
     
         f.write(f"\\begin{{center}}\n\t\\begin{{tabular}}[h]{{*{{{cols}}}{{c}}}}\n    ")
         for i,pair in enumerate(L2):
