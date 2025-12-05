@@ -24,17 +24,24 @@ Si descrivono brevemente i dati del primo punto dell'esercizio $\log_{5}(8563)$ 
 \textbf{N.B.} Il calcolo di $a$ dalle variabili $a_i$ ottenute dalle diverse iterazioni è stato omesso in quanto banale ($ a= \sum_{i = 0}^{c-1}a_iq^i$)
 Ponendo le soluzioni ottenute a sistema si ottiene:
 
-\begin{equation*}
+\begin{equation}
+    \label{eq:1}
     \begin{cases}
         a \equiv 67 \mod 113\\
         a \equiv 1 \ \mod 2\\
         a \equiv 99 \mod 127
     \end{cases}
-\end{equation*}
-Per il teorema cinese del resto la $a$ cercata si calcola con i seguenti passaggi. $n = 31152$, $\forall i = 1,\dots,k$ 
+\end{equation}
+Per il teorema cinese del resto la $a$ cercata si calcola con i seguenti passaggi. $n = 28702$, $\forall i = 1,\dots,k$ 
 \[
     y_i = \frac{n}{n_i} \text{ ($n_i$ fattore di $n$)}
 \]
 \noindent
-Per cui $y_0 = \frac{28702}{113} = 254,\ y_1 = \frac{28702}{127} = 226,\ y_2 = \frac{28702}{2} = 14351$ successivamente si calcolano le inverse moltiplicative modulo $n_i$ ($z_i \equiv {y_{i}}^{-1}$). Si ottiene:
-$z_0 = 109,\ z_1 = 68,\ z_2 = 1$.
+Per cui $y_0 = \frac{28702}{113} = 254,\ y_1 = \frac{28702}{2} = 14351,\ y_2 = \frac{28702}{127} = 226,$ successivamente si calcolano le inverse moltiplicative modulo $n_i$ ($z_i \equiv {y_{i}}^{-1}$). Si ottiene:
+$z_0 = 109,\ z_1 = 1,\ z_2 = 68$.
+Secondo il teorema 
+\[
+    a = \sum_{i=0}^{k}a_iy_iz_i
+\]
+$a$ è soluzione del sistema (\ref{eq:1})\\
+$a = (67 \cdot 254 \cdot 109 ) + ( 1 \cdot 14351 \cdot 1) +  ( 99 \cdot 226 \cdot 68) = \fbox{3909 mod 28702}$
