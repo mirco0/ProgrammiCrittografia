@@ -2,7 +2,31 @@
 Implementa l'algoritmo di Shanks per trovare il logaritmo discreto in ${\mathbb{Z}_p}^*$. Con $p$ primo e $\alpha$ un elemento primitivo modulo $p$. Trova $\log_{106}(12375)$ in ${\mathbb{Z}_{24691}}^*$e $\log_6(248388)$ in ${\mathbb{Z}_{458009}}^*$
 
 \subsection*{Soluzione}
-L'implementazione dell'algoritmo di Shanks richiede 
+L'implementazione dell'algoritmo di Shanks richiede anche l'implementazione di \textit{Campi} e \textit{Gruppi} (nello specifico moltiplicativi). Per semplicità il codice scritto tiene conto solamente dei gruppi moltiplicativi includendo le funzioni dei campi finiti. Segue una breve descrizione delle funzioni scritte
+per la classe \texttt{Gruppo} modulo $p$ (numero primo)
+\begin{itemize}
+    \item \texttt{exp(a,b)} Per l'esponenziazione $a^b$ utilizzando la tecnica dello \textit{Square and Multiply}
+    \item \texttt{mul(a,b)} Per l'operazione di moltiplicazione $a \cdot b$
+    \item \texttt{inverse(a)} Per il calcolo dell'\textit{inversa moltiplicativa} modulo $p$, calcolato con l'\textit{algoritmo Euclideo} 
+\end{itemize}
+\noindent
+Con queste funzioni è banale mettere in pratica l'algoritmo di \textit{Shanks}, è possibile visionare il codice nel file \texttt{Crittoesercizi3/Esercizio 1/Shanks.py}\\
+\noindent
+\textbf{N.B.} L'algoritmo seguente fa uso di dizionari (strutture dati, che in python hanno una complessità di \textit{lookup} $O(1)$)
 
-\subsection{7.3 Stinson-Paterson}
+\subsubsection*{Calcolo logartimo discreto}
+Qui segue l'esecuzione dell'algoritmo per il primo logarimo discreto dell'esercizio:
+Si ha $\alpha  = 106,n = 24690, \beta= 12375$, per cui $m = \lceil \sqrt{24691} \rceil = 158$. 
+Proseguendo $\alpha^{158} \mod 24691 = 24689$.\\
+\newpage
+Si calcolano le coppie $(j,24689^j) \; \forall j = 0,\dots,m$, sono riportate nella tabella sottostante
+\input{tables/es1_1.tex}
+La seconda lista contiene le coppie $(i,12375 \cdot 106^{-i} \mod 24691) \; \forall i = 0,\dots,m$ 
+\input{tables/es1_2.tex}
+Da queste due tabelle si notano le coppie $(141,19999)$ e $(114,19999)$ che hanno una collisione. Per cui il valore del logaritmo discreto cercato è
+\[
+    \log_{106}(12375) = (158 \cdot 141 + 114) \mod 24691 = 22392
+\]
+
+Analogamente si procede con il secondo punto dell'esercizio, ovvero il calcolo di $\log_6(248388)$ in ${\mathbb{Z}_{458009}$, 
 \subsection{7.5 Stinson-Paterson}

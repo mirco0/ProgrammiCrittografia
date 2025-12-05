@@ -19,7 +19,8 @@ def algo_shanks(G: Group,n,a,b):
             L2[val] = i
 
     for l in L1.items():
-        if l[0] in L2:
+        collision = l[0] 
+        if collision in L2:
             j = l[1]
             i = L2[l[0]]
             return (m*j + i) % n
