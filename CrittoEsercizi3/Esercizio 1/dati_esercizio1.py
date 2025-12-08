@@ -93,7 +93,7 @@ def scrivi_dati_es7_5(file):
 
         # Punto 1 dell'esercizio
         for j,dati in enumerate(variables[1]["var"]):
-            f.write(f"Test per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
+            f.write(f"Esecuzione per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
             f.write("\\begin{center}\n    \\begin{tabular}{@{}lccl@{}}\n        \\toprule\n        Step & Variabile & & Valore \\\\ \n        \\midrule\n        ")
             for index,variabili in enumerate(dati):
                 f.write(f"        {index} & $\\beta_{{{index}}}$ & $=$ &${variabili['beta_0']}$\\\\\n")
@@ -116,7 +116,7 @@ def scrivi_dati_es7_5(file):
         variables = capture_locals(algo_pohlig,G,p-1,b,y)
 
         for j,dati in enumerate(variables[1]["var"]):
-            f.write(f"Test per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
+            f.write(f"Esecuzione per il fattore $q = {dati[0]['exp']}$ $c = {len(dati)}$\n")
             f.write("\\begin{center}\n    \\begin{tabular}{@{}lccl@{}}\n        \\toprule\n        Step & Variabile & & Valore \\\\ \n        \\midrule\n        ")
             for index,variabili in enumerate(dati):
                 f.write(f"        {index} & $\\beta_{{{index}}}$ & $=$ &${variabili['beta_0']}$\\\\\n")
