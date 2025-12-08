@@ -1,0 +1,56 @@
+\textit{Birthday ``paradox'' con probabilità qualsiasi} Dimostrare se $\Omega$ è un insime di $N$ elementi dotato
+di una probabilità possibilimente non uniforme, allora dopo $3\lceil\sqrt{N}\rceil$ estrazioni indipendenti di
+elementi da $\Omega$, la probabilità di aver estratto elementi tutti diversi è minore di 1/2.
+
+\subsection{Soluzione}
+Sia $\Omega = \{x_1,\dots,x_n\}$, con una distribuzione non uniforme $\forall i = 1,\dots, n \ Pr[x_i] = p_i$ e $\sum_{i=1}^{n}{p_i} = 1$. Sia $Q = 3\lceil \sqrt(n)\rceil$ il numero di estrazioni.
+Si definisce $E_{i,j}$ l'evento in cui l'estrazione \textit{i-esima} e \textit{j-esima} $(X_i, X_j)$ generano una collisione
+\[
+    E_{i,j} = \sum_{k=1}^{n} Pr[X_i = k \land X_j = k] = \sum_{k=1}^{n} Pr[X_i = k] \cdot \sum_{k=1}^{n}Pr[X_j=k] = \sum_{k=1}^{n} {p_k}^{2}
+\]
+$E_{i,j}$ sarà la somma della probabilità di collisione per qualunque elemento \textit{k-esimo}.\\
+\vspace{0.3cm}
+Si ricorda lo union bound:
+
+\[
+\boxed{
+    Pr[\ \bigcup_{i}^{n}{A_i} \ ] \leq \sum_{i=0}^{n}Pr[A_i]
+}
+\]
+
+\vspace{0.5cm}
+\noindent
+Quindi sia $E$ l'evento di almeno una collisione su $Q$ estrazioni, si usa lo \textit{union buond} per stimare la probabilità di $E$, 
+\[
+    Pr[E] = Pr\Big[\ \bigcup_{1\leq i < j \leq Q} E_{i,j} \ \Big]
+\]
+Si ricorda che il numero di coppie $i,j$ tale che $1\leq i<j \leq Q$ è $\binom{Q}{2} = \frac{Q(Q-1)}{2}$ per cui
+\[
+    Pr \Big[ \bigcup_{1\leq i < j \leq Q} E_{i,j} \ \Big] \leq \binom{Q}{2}\sum_{i=1}^{N}{p_i}^2
+\]
+
+Si ottiene 
+\[
+    Pr[E] \leq \binom{Q}{2}\sum_{i=1}^{N}{p_i}^2
+\]
+
+Inoltre la somma $\sum_{k=1}^{n}{p_i}^2$ è minima quando la distribuzione e uniforme e quindi
+\[ 
+    \sum_{k=1}^{n}{p_i}^2 \geq n \sum_{k=1}^{n}{\left( \frac{1}{n} \right)}^2 = \frac{1}{n}
+\]
+Infine
+\[
+    Pr[E] \geq \frac{Q(Q-1)}{2} \cdot \left( \frac{1}{n} \right) = \frac{Q(Q-1)}{2n}
+\]
+
+\vspace{0.5cm}
+\noindent
+Vogliamo ottenere la probabilità di $E^c = 1 - Pr[E]$
+\[
+    Pr[E^c] = 1 - Pr[E] \leq 1 - \frac{Q(Q-1)}{2} \sum_{k=1}^{n}{p_i}^2
+\]
+Usando la disuguaglianza $1-x \leq e^{-x}$ si ottiene
+\[
+    Pr[E^c] = e^{-\binom{Q}{2} \sum_{k=1}^{n}{p_i}^2}
+\]
+
