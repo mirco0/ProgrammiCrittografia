@@ -14,9 +14,10 @@ Si definisce $E_{i,j}$ l'evento in cui l'estrazione \textit{i-esima} e \textit{j
 \]
 
 \noindent
-Si ricorda lo union bound:
-\[
-    Pr\Big[\bigcup_{i=1}^{n} A_i\Big] \leq \sum_{i=1}^{n} Pr[A_i].
+Si ricorda lo \textit{union bound}:
+\[  \boxed{
+        Pr\Big[\bigcup_{i=1}^{n} A_i\Big] \leq \sum_{i=1}^{n} Pr[A_i]
+    }
 \]
 \vspace{0.5cm}
 \noindent
@@ -68,4 +69,4 @@ Poiché $e^{-9/2} < \frac{1}{2}$, si conclude:
 \]
 
 \noindent
-Dunque dopo $3\lceil \sqrt{N} \rceil$ estrazioni, la probabilità di non osservare collisioni è minore di $1/2$. $\square$
+Dunque dopo $3\lceil \sqrt{N} \rceil$ estrazioni, la probabilità di non avere collisioni è minore di $1/2$. $\square$
