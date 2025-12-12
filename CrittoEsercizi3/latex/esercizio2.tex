@@ -8,8 +8,8 @@ Sia $Q = 3\lceil \sqrt{n}\rceil$ il numero di estrazioni.
 
 Si definisce $E_{i,j}$ l'evento in cui l'estrazione \textit{i-esima} e \textit{j-esima} $(X_i, X_j)$ generano una collisione:
 \[
-    Pr[E_{i,j}] = \sum_{k=1}^{n} Pr[X_i = k \land X_j = k] 
-    = \sum_{k=1}^{n} Pr[X_i = k] \cdot Pr[X_j=k] 
+    Pr[E_{i,j}] = \sum_{k=1}^{n} Pr[X_i = x_k \land X_j = x_k] 
+    = \sum_{k=1}^{n} Pr[X_i = x_k] \cdot Pr[X_j= x_k] 
     = \sum_{k=1}^{n} {p_k}^{2}.
 \]
 
