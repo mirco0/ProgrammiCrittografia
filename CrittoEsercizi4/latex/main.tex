@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mdframed}
+
+\title{Esercizi Crittografia}
+\date{12 gennaio 2025}
+\author{Mirco Pasquali}
+\begin{document}
+
+\maketitle
+\input{matricola.tex}
+\begin{quote}
+    Nelle soluzioni degli esercizi faccio riferimento a definizioni e teoremi dai libri consigliati dove possibile, in altri casi potrei fare riferimento a definizioni trovate su \emph{Wikipedia}
+\end{quote}
+
+\section{Esercizio 1}
+\subsection{Esercizio 3}
+Sia $E: y^2 = x^3 + cx^2 + dx + e$ una curva ellittica su un campo $k$. Calcolare il grado delle mappe $E \to \mathbb{P}^1$ date dalle seguenti funzioni razionali:
+\begin{enumerate}[(a)]
+    \item $f(x,y) = x$
+    \item $f(x,y) = y$
+    \item $f(x,y) = y-x$
+\end{enumerate}
+
+\subsection*{Soluzione}
+Ricordo la definizione di grado di una mappa tra campi dal libro \emph{Silverman}
+    \begin{mdframed}
+        Sia $\phi: C_1 \to C_2$ una mappa di curve definite su $K$. Se $\phi$ è non costante, è detta \emph{mappa finita}, di cui il grado è
+        \[
+            \deg \phi = \left[ K(C_1) : \phi^*K(C_2)\right]
+        \]
+    \end{mdframed}
+    Per cui il grado della mappa è il grado dell'estensione di campo $K(C_1)$ su $\phi^*K(C_2)$, dalla teoria, un polinomio irriducibile $p \in K(x)$ in un campo $K$, genera un campo d'estensione contente l'elemento algebrico $\alpha$ radice di $p$. Il grado del polinomio minimo che genera tale estensione è proprio il grado dell'estensione.
+
+    \vspace{1em}\noindent
+    Per $f(x,y) = x$ si deve calcolare $[K(E)):K(x))]$ il grado di estensione del campo della curva sul campo della retta proiettiva, l'equazione della curva è
+    \[
+        y^2 = x^3 + cx^2 + dx + e
+    \]
+    fissata una $x$ l'equazione da risolvere è di questo tipo $y^2 = \cdots$, ovvero un polinomio di secondo grado in $y$,che avrà 2 radici, per cui il grado di estensione è 2.
+    
+    \vspace{2em}\noindent
+    Per $f(x,y) = y$ si procede allo stesso modo, si deve calcolare il grado $[K(E)):K(y))]$. Data l'equazione della curva, e fissando una $y$, si ottiene un polinomio $x^3 + cx^2 + dx + e = \cdots$, ovvero un polinomio di terzo grado, per cui il grado di estensione è 3.
+
+
+    \vspace{2em}\noindent
+    Per $f(x,y) = y-x$ si deve calcolare il grado $[K(E)):K(y-x))]$. Data l'equazione della curva, e fissando una $t = y - x$ quindi $y = t + x$,  si ottiene un polinomio 
+    \[
+        (t + x)^2 = x^3 + cx^2 + dx + e \qquad t^2 = x^3 + (c-1)x^2 + (d-2t)x + e
+    \]
+    ovvero un polinomio di terzo grado, per cui il grado di estensione è 3.
+
+\newpage
+\section{Esercizio 2}
+Sia $E$ una curva ellittica definita su un campo finito $\mathbb{F}_q$. Dimostrare i seguenti fatti sul gruppo dei punti $E(\mathbb{F}_q)$.
+\begin{enumerate}[(a)]
+    \item Se la curva $E$ è data da un'equazione della forma $y^2 = x(x - 1)(x - \lambda)$ per qualche $\lambda \in \mathbb{F}_q$,
+        allora $E(\mathbb{F}_q)$ non è ciclico.
+
+    \item In generale, esistono interi positivi $n, k$ tali che $E(\mathbb{F}_q)$ è isomorfo a $(\mathbb{Z}/n\mathbb{Z}) \times (\mathbb{Z}/k\mathbb{Z})$ (è
+    compresa la possibilità $k = 1$, in cui si ha $(\mathbb{Z}/n\mathbb{Z}) \times (\mathbb{Z}/k\mathbb{Z}) \cong (\mathbb{Z}/n\mathbb{Z}))$
+\end{enumerate}
+\subsection*{Soluzione 5a}
+%Pag 77 libro.
+Dalla teoria, su una curva ellittica un punto $P$ soddisfa $2P = O_E$, se e solo se la tangente in $P$ è verticale. Sia la curva ellittica definita da un'equazione cubica, $y^2 = (x-e_1)(x-e_2)(x-e_3)$, i punti  $P$ che soddisfano $2P = O_E$ sono proprio quelli per $y = 0$.
+
+\vspace{1em}\noindent
+Per l'equazione data $y^2 = x(x-1)(x-\lambda)$, si ottiene il gruppo di punti di due torsione $E[2] = \{ O_E,(0,0),(1,0),(\lambda,0)\}$ di ordine 4, in cui gli elementi $(0,0),(1,0),(\lambda,0)$ sono di ordine 2, verificabile anche attraverso un semplice calcolo
+
+\vspace{1em}
+L'equazione della curva data è equivalente a
+\[
+    y^2 = x^3 + (\lambda-1) x^2 + \lambda x 
+\]
+Ovvero una curva ellittica in forma generalizzata di Weierstass $y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6$, con i coefficienti
+\[
+    a_1 = 0 \quad a_2 = \lambda - 1 \quad a_3 = 0 \quad a_4 = \lambda \quad a_6 = 0
+\]
+
+Data l'equazione di Weierstass generalizzata è possibile calcolare il punto $-P$ relativo a un punto $P = (x,y)$ con la formula $-P(x,-a_1x-a_3-y)$, per cui nel nostro caso si ha che $-P = (x,-y)$.\\
+Si ottiene $\forall P \in \{ (0,0),(1,0),(\lambda,0)\} \ P = -P$ e $2P = P + P = P + (-P) = O_E$, i punti sono di due torsione e generano i sottogruppi di ordine 2
+\begin{align*}
+    \langle (0,0) \rangle = \{ O_E, (0,0)\} \quad
+    \langle (1,0) \rangle = \{ O_E , (1,0)\} \quad
+    \langle (\lambda,0) \rangle = \{ O_E, (\lambda, 0)\} 
+\end{align*}
+%Pag 478 https://en.wikipedia.org/wiki/Subgroups_of_cyclic_groups
+Per definizione un gruppo $G$ di ordine $n$ è ciclico se e solo se per ogni divisore $d$ di $n$, $G$ ha al massimo un sottogruppo di ordine $d$.
+\vspace{1em}
+In questo caso il gruppo $E(\mathbb{F}_q)$ non è ciclico perché ha $3$ elementi di ordine $2$, che generano $3$ sottogruppi di ordine $2$.
+
+\subsection*{Soluzione 5b}
+
+Dalla teoria, per la \emph{legge di gruppo} sulle curve ellittiche, $E(\mathbb{F}_q)$ è un gruppo abeliano finito.
+
+Per il teorema fondamentale dei gruppi abeliani finiti, $E(\mathbb{F}_q)$ è isomorfo a una somma diretta di gruppi ciclici
+\[
+    E(\mathbb{F}_q) \cong \mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}
+\]
+in cui $n_1 \mid n_2 \mid \cdots \mid n_r$.
+
+In cui in ogni gruppo $n_i$ ha $n_1$ elementi di ordine che divide $n_1$.
+
+\vspace{1em}\noindent
+Quindi $E(\mathbb{F}_q$) è isomorfo alla somma diretta di $r$ gruppi ciclici. Da un teorema noto, per una curva ellittica su un campo $K$ e un intero $n$, se la caratteristica di $K$ non divide $n$. 
+\[
+    E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.
+\]
+\noindent
+Il sottogruppto degli elementi di ordine che divide $n_1$ ha cardinalità $n_1^r$ ed è contenuto in $E[n_1]$, ma $E[n_1]$
+%$\mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$
+contiene al massimo $n^2$ elementi. 
+
+\vspace{1em}
+Poiché $E(\mathbb{F}_q) \subseteq E[n_1]$ e $E(\mathbb{F}_q) \cong \mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$ allora
+\[
+    {n_1}^r \leq {n_1}^2 \quad r \leq 2
+\]
+quindi $E(\mathbb{F}_q)$ ha al più due fattori ciclici per due interi $n,k$. 
+
+Il gruppo dei punti razionali di una curva ellittica su un campo finito ha al più due fattori ciclici, quindi esistono interi positivi $n,k$ tali che
+\[
+    E(\mathbb{F}_q) \cong \mathbb{Z}_n \times \mathbb{Z}_k.
+\]
+
+\end{document}
