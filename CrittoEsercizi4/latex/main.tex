@@ -38,24 +38,41 @@ Ricordo la definizione di grado di una mappa tra campi dal libro \emph{Silverman
     Per cui il grado della mappa è il grado dell'estensione di campo $K(C_1)$ su $\phi^*K(C_2)$, dalla teoria, un polinomio irriducibile $p \in K(x)$ in un campo $K$, genera un campo d'estensione contente l'elemento algebrico $\alpha$ radice di $p$. Il grado del polinomio minimo che genera tale estensione è proprio il grado dell'estensione.
 
     \vspace{1em}\noindent
-    Per $f(x,y) = x$ si deve calcolare $[K(E)):K(x))]$ il grado di estensione del campo della curva sul campo della retta proiettiva, l'equazione della curva è
+    Per $f(x,y) = x$ si deve calcolare $[K(E):K(x)]$ il grado di estensione del campo di funzioini sulla curva sul campo della retta proiettiva, l'equazione della curva è
     \[
         y^2 = x^3 + cx^2 + dx + e
     \]
-    fissata una $x$ l'equazione da risolvere è di questo tipo $y^2 = \cdots$, ovvero un polinomio di secondo grado in $y$,che avrà 2 radici, per cui il grado di estensione è 2.
+    Consideriamo questo polinomio come un'equazione a variabile $y$, nel campo $K(x)$ ($K(x)[y]$). Se il polinomio $L(x) = x^3 + cx^2 + dx +e$ fosse un quadrato su $K(x)$ (composto da funzioni razionali).
+    \[
+        L(x) = \frac{p(x)}{q(x)}
+    \]
+    Il grado di $L$ è dato da $\deg(p) - \deg(q)$, se $L(x)$ fosse un quadrato allora
+    \[
+        L(x) = \frac{p(x)^2}{q(x)^2}
+    \]
+    $L(x)$ sarebbe un polinomio con grado $2\deg(p) - 2\deg(q)$, ovvero con grado pari. Per cui $L(x)$ non può essere un quadrato, ed è un polinomio irriducibile, $y$ è algebrico su $K(x)$, il grado di estensione è uguale al grado del polinomio minimo $L(x)$, per cui il grado di estensione è 2.
+
     
     \vspace{2em}\noindent
-    Per $f(x,y) = y$ si procede allo stesso modo, si deve calcolare il grado $[K(E)):K(y))]$. Data l'equazione della curva, e fissando una $y$, si ottiene un polinomio $x^3 + cx^2 + dx + e = \cdots$, ovvero un polinomio di terzo grado, per cui il grado di estensione è 3.
+    Per $f(x,y) = y$, si deve calcolare il grado $[K(E):K(y)]$. Si ha il polinomio $P(X)$ in $K(y)[X]$, 
+    \[
+        P(X) = X^3 +cX^2 +dX + e - y^2
+    \]
 
+    $P(X)$ non è riducibile, non può esistere $X_0 \in K(y)$ tale che $P(X_0) = 0$.$x = X_0$ sarebbe una funzione razionale di $y$, e
+    \[
+        y^2 = x^3 + c x^2 + d x + e
+    \] 
+    sarebbe un quadrato di una funzione in $y$ uguale a un polinomio di grado 3, quindi $P(X)$ è irriducibile, $X$ è algebrico su $K(y)$ e come prima, il grado di estensione è uguale al grado del polinomio minimo $P(X)$, il grado di estensione è 3.
 
     \vspace{2em}\noindent
-    Per $f(x,y) = y-x$ si deve calcolare il grado $[K(E)):K(y-x))]$. Data l'equazione della curva, e fissando una $t = y - x$ quindi $y = t + x$,  si ottiene un polinomio 
+    Per $f(x,y) = y-x$ si deve calcolare il grado $[K(E):K(y-x)]$. Data l'equazione della curva, e fissando una $t = y - x$ quindi sostituendo $y = t + x$,  si ottiene un polinomio 
     \[
-        (t + x)^2 = x^3 + cx^2 + dx + e \qquad t^2 = x^3 + (c-1)x^2 + (d-2t)x + e
+        (t + x)^2 = x^3 + cx^2 + dx + e \qquad  x^3 + (c-1)x^2 + (d-2t)x + e - t^2 = 0
     \]
-    ovvero un polinomio di terzo grado, per cui il grado di estensione è 3.
+    ovvero un polinomio di terzo grado in $K(t)$, irriducibile come nel caso precedente, per cui il grado di estensione è 3.
 
-\newpage
+% \newpage
 \section{Esercizio 2}
 Sia $E$ una curva ellittica definita su un campo finito $\mathbb{F}_q$. Dimostrare i seguenti fatti sul gruppo dei punti $E(\mathbb{F}_q)$.
 \begin{enumerate}[(a)]
@@ -107,17 +124,17 @@ in cui $n_1 \mid n_2 \mid \cdots \mid n_r$.
 In cui in ogni gruppo $n_i$ ha $n_1$ elementi di ordine che divide $n_1$.
 
 \vspace{1em}\noindent
-Quindi $E(\mathbb{F}_q$) è isomorfo alla somma diretta di $r$ gruppi ciclici. Da un teorema noto, per una curva ellittica su un campo $K$ e un intero $n$, se la caratteristica di $K$ non divide $n$. 
+Quindi $E(\mathbb{F}_q)$ è isomorfo alla somma diretta di $r$ gruppi ciclici. Da un teorema noto, per una curva ellittica su un campo $K$ e un intero $n$, se la caratteristica di $K$ non divide $n$. 
 \[
     E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.
 \]
 \noindent
-Il sottogruppto degli elementi di ordine che divide $n_1$ ha cardinalità $n_1^r$ ed è contenuto in $E[n_1]$, ma $E[n_1]$
+Il sottogruppo degli elementi di ordine che divide $n_1$ ha cardinalità $n_1^r$ ed è contenuto in $E[n_1]$, ma $E[n_1]$
 %$\mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$
-contiene al massimo $n^2$ elementi. 
+contiene al massimo $n_1^2$ elementi. 
 
 \vspace{1em}
-Poiché $E(\mathbb{F}_q) \subseteq E[n_1]$ e $E(\mathbb{F}_q) \cong \mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$ allora
+Poiché $E(\mathbb{F}_q) \cong \mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$ allora
 \[
     {n_1}^r \leq {n_1}^2 \quad r \leq 2
 \]
