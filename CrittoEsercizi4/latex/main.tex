@@ -38,7 +38,7 @@ Ricordo la definizione di grado di una mappa tra campi dal libro \emph{Silverman
     Per cui il grado della mappa è il grado dell'estensione di campo $K(C_1)$ su $\phi^*K(C_2)$, dalla teoria, un polinomio irriducibile $p \in K(x)$ in un campo $K$, genera un campo d'estensione contente l'elemento algebrico $\alpha$ radice di $p$. Il grado del polinomio minimo che genera tale estensione è proprio il grado dell'estensione.
 
     \vspace{1em}\noindent
-    Per $f(x,y) = x$ si deve calcolare $[K(E):K(x)]$ il grado di estensione del campo di funzioini sulla curva sul campo della retta proiettiva, l'equazione della curva è
+    Per $f(x,y) = x$ si deve calcolare $[K(E):K(x)]$ il grado di estensione del campo di funzioni sulla curva sul campo della retta proiettiva, l'equazione della curva è
     \[
         y^2 = x^3 + cx^2 + dx + e
     \]
@@ -67,7 +67,7 @@ Ricordo la definizione di grado di una mappa tra campi dal libro \emph{Silverman
     \vspace{2em}\noindent
     Per $f(x,y) = y-x$ si deve calcolare il grado $[K(E):K(y-x)]$. Data l'equazione della curva, e fissando una $t = y - x$ quindi sostituendo $y = t + x$,  si ottiene un polinomio 
     \[
-        (t + x)^2 = x^3 + cx^2 + dx + e \qquad  x^3 + (c-1)x^2 + (d-2t)x + e - t^2 = 0
+        (t + x)^2 = x^3 + cx^2 + dx + e \qquad  x^3 + (c-1)x^2 + (d-2t)x + e - t^2
     \]
     ovvero un polinomio di terzo grado in $K(t)$, irriducibile come nel caso precedente, per cui il grado di estensione è 3.
 
@@ -98,7 +98,7 @@ Ovvero una curva ellittica in forma generalizzata di Weierstass $y^2 + a_1xy + a
     a_1 = 0 \quad a_2 = \lambda - 1 \quad a_3 = 0 \quad a_4 = \lambda \quad a_6 = 0
 \]
 
-Data l'equazione di Weierstass generalizzata è possibile calcolare il punto $-P$ relativo a un punto $P = (x,y)$ con la formula $-P(x,-a_1x-a_3-y)$, per cui nel nostro caso si ha che $-P = (x,-y)$.\\
+Data l'equazione di Weierstass generalizzata è possibile calcolare il punto $-P$ relativo a un punto $P = (x,y)$ con la formula $-P = (x,-a_1x-a_3-y)$, per cui nel nostro caso si ha che $-P = (x,-y)$.\\
 Si ottiene $\forall P \in \{ (0,0),(1,0),(\lambda,0)\} \ P = -P$ e $2P = P + P = P + (-P) = O_E$, i punti sono di due torsione e generano i sottogruppi di ordine 2
 \begin{align*}
     \langle (0,0) \rangle = \{ O_E, (0,0)\} \quad
@@ -106,8 +106,9 @@ Si ottiene $\forall P \in \{ (0,0),(1,0),(\lambda,0)\} \ P = -P$ e $2P = P + P =
     \langle (\lambda,0) \rangle = \{ O_E, (\lambda, 0)\} 
 \end{align*}
 %Pag 478 https://en.wikipedia.org/wiki/Subgroups_of_cyclic_groups
-Per definizione un gruppo $G$ di ordine $n$ è ciclico se e solo se per ogni divisore $d$ di $n$, $G$ ha al massimo un sottogruppo di ordine $d$.
-\vspace{1em}
+Per definizione \footnote{(teorema fondamentale dei gruppi ciclici)} un gruppo $G$ di ordine $n$ è ciclico se e solo se per ogni divisore $d$ di $n$, $G$ ha al massimo un sottogruppo di ordine $d$.
+
+\vspace{1em}\noindent
 In questo caso il gruppo $E(\mathbb{F}_q)$ non è ciclico perché ha $3$ elementi di ordine $2$, che generano $3$ sottogruppi di ordine $2$.
 
 \subsection*{Soluzione 5b}
@@ -123,7 +124,7 @@ in cui $n_1 \mid n_2 \mid \cdots \mid n_r$.
 In cui in ogni gruppo $n_i$ ha $n_1$ elementi di ordine che divide $n_1$.
 
 \vspace{1em}\noindent
-Quindi $E(\mathbb{F}_q)$ è isomorfo alla somma diretta di $r$ gruppi ciclici. Da un teorema noto, per una curva ellittica su un campo $K$ e un intero $n$, se la caratteristica di $K$ non divide $n$. 
+Quindi $E(\mathbb{F}_q)$ è isomorfo alla somma diretta di $r$ gruppi ciclici. Da un teorema noto\footnote{Teorema visto a lezione}, per una curva ellittica su un campo $K$ e un intero $n$, se la caratteristica di $K$ non divide $n$:
 \[
     E[n] \cong \mathbb{Z}_n \oplus \mathbb{Z}_n.
 \]
@@ -135,13 +136,13 @@ contiene al massimo $n_1^2$ elementi.
 \vspace{1em}
 Poiché $E(\mathbb{F}_q) \cong \mathbb{Z}_{n_1} \oplus \mathbb{Z}_{n_2} \oplus \cdots \oplus \mathbb{Z}_{n_r}$ allora
 \[
-    {n_1}^r \leq {n_1}^2 \quad r \leq 2
+    {n_1}^r \leq {n_1}^2 \qquad r \leq 2
 \]
 quindi $E(\mathbb{F}_q)$ ha al più due fattori ciclici per due interi $n,k$. 
 
 Il gruppo dei punti razionali di una curva ellittica su un campo finito ha al più due fattori ciclici, quindi esistono interi positivi $n,k$ tali che
 \[
-    E(\mathbb{F}_q) \cong \mathbb{Z}_n \times \mathbb{Z}_k.
+    E(\mathbb{F}_q) \cong \mathbb{Z}_n \times \mathbb{Z}_k
 \]
-
+con $n | k$.
 \end{document}
